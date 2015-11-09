@@ -69,6 +69,32 @@ public class Mancala {
 		mancalaB++;
 		return --stones;
 	}
+
+	/**
+	 * This method captures all the stones from the opposite pit.
+	 * @param player This is the current player that receives captured stones
+	 * @param pit This is the current pit which has the same x index as the opposite pit.
+	 */
+	public void captureAllFor(int player, int pit)
+	{
+		//Takes all the stones from the opposing pit.
+		if(player == 0) // y = 0 is Player B. y = 1 is Player A
+		{
+			int stones = board[1][pit];
+			board[1][pit] = 0;
+			board[player][pit] += stones;
+		}
+		else if(player == 1)
+		{
+			int stones = board[0][pit];
+			board[0][pit] = 0;
+			board[player][pit] += stones;
+		}
+		else
+		{
+			System.out.println("Error has Occurred. Non-existing player called");
+		}
+	}
 	
 	/**
 	 * this method is used to move the stones around
@@ -85,8 +111,20 @@ public class Mancala {
 		if(hasStones(x,y))
 		{
 			int stonesToPlace=getStones(x,y);
+			boolean lastStone = false;
+
 			while(stonesToPlace>0)
 			{
+				// Prior to placement, checks if stone is last.
+				if(stonesToPlace==1)
+				{
+					lastStone = true;
+					// Next condition is checking the size of the next pit to place.
+					// if next pit is 0, then captureAllFor
+//					captureAllFor(y,x);
+
+				}
+
 				if(x==COLUMNS-1 && y==1)
 				{
 					if(playerNum==1)
