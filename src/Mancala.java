@@ -5,6 +5,10 @@ public class Mancala {
 	private int board[][];//2d array for mancala board
 	private static final int ROWS=2;//rows of board
 	private static final int COLUMNS=6;//columns of board
+	private int playerTurn;
+	private BoardStack boards;
+	private int aUndo;
+	private int bUndo;
 	
 	/**
 	 * this constructs a blank Mancala board
@@ -15,6 +19,10 @@ public class Mancala {
 		mancalaA=0;
 		mancalaB=0;
 		board=new int[ROWS][COLUMNS];
+		playerTurn=0;
+		boards=new BoardStack();
+		aUndo=3;
+		bUndo=3;
 	}
 	
 	/**
@@ -31,6 +39,7 @@ public class Mancala {
 				board[y][x]=numStones;
 			}
 		}
+		boards.push(board);
 	}
 	
 	/**
@@ -121,7 +130,7 @@ public class Mancala {
 					lastStone = true;
 					// Next condition is checking the size of the next pit to place.
 					// if next pit is 0, then captureAllFor
-//					captureAllFor(y,x);
+					captureAllFor(y,x);
 
 				}
 
@@ -154,6 +163,9 @@ public class Mancala {
 				}
 			}
 		}
+		if(!goAgain)
+			playerTurn = 1 - playerTurn;
+		boards.push(board);
 		return goAgain;
 	}
 	
@@ -173,6 +185,58 @@ public class Mancala {
 		}
 		
 		return over;
+	}
+	
+	public int isGameOver()
+	{
+		int over=0;// 0 game not over; 1 gmae over
+		if(gameOver())
+			over=1;
+		return over;
+			
+	}
+	
+	public int getPlayer1Mancala()
+	{
+		return mancalaA;
+	}
+	
+	public int getPlayer2Mancala()
+	{
+		return mancalaB;
+	}
+	
+	public int getPlayerTurn()
+	{
+		return playerTurn;
+	}
+	
+	public int[][] getBoard()
+	{
+		return board;
+	}
+	
+	public void undoMove()
+	{
+		if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
+		{
+			board=boards.pop();
+			playerTurn = 1 - playerTurn;
+			if(playerTurn==0)
+				aUndo--;
+			else
+				bUndo--;
+		}
+	}
+	
+	public int getUndoAmount()
+	{
+		int undos=0;//will be player undos for this turn
+		if(playerTurn==0)
+			undos=aUndo;
+		else
+			undos=bUndo;
+		return undos;
 	}
 	
 	public void printBoard()
