@@ -1,4 +1,3 @@
-
 public class Mancala {
 	private int mancalaA;//player A's Mancala count
 	private int mancalaB;//player B's Mancala count
