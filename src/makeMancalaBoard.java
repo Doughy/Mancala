@@ -27,10 +27,11 @@ public class makeMancalaBoard extends JPanel implements MouseListener {
 	public JFrame alpha=new JFrame("Mancala");
 	private JFrame frame;
 	public Color backgroundColor, pitColor, fontColor, marbleColor, marbleOutlineColor;
-	public int number=5;
-	public int mancalaA=100;
-	public int mancalaB=100;
-	public int[][] board= {{4,2,5,0,1,10},{10,2,0,1,2,3}};
+	public int number;
+	public int mancalaA=0;
+	public int mancalaB=0;
+	public int[][] board=startBox.game.getBoard();
+
 	
 	public makeMancalaBoard(Color backgroundColor, Color pitColor, Color fontColor, Color marbleColor, Color marbleOutlineColor) {
 		this.backgroundColor=backgroundColor;
@@ -82,7 +83,7 @@ public class makeMancalaBoard extends JPanel implements MouseListener {
 			}
 		}
 		
-		for(int i=0;i<=mancalaA;i++){
+		for(int i=0;i<startBox.game.getPlayer2Mancala();i++){
 			g2.setColor(pitColor);
 			randomX=randomMancalaX(53);
 			randomY=randomMancalaY(155);
@@ -92,7 +93,7 @@ public class makeMancalaBoard extends JPanel implements MouseListener {
 			g2.fill(new Ellipse2D.Double(randomX, randomY, 35, 35));
 		}
 		
-		for(int i=0;i<=mancalaB;i++){
+		for(int i=0;i<startBox.game.getPlayer1Mancala();i++){
 			g2.setColor(pitColor);
 			randomX=randomMancalaX(973);
 			randomY=randomMancalaY(155);
