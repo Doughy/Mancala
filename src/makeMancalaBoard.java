@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 public class makeMancalaBoard extends JPanel implements MouseListener {
 	
 	public JFrame alpha=new JFrame("Mancala");
+	private JFrame frame;
 	public Color backgroundColor, pitColor, fontColor, marbleColor, marbleOutlineColor;
 	public int number=5;
 	public int mancalaA=100;
@@ -164,7 +165,7 @@ public class makeMancalaBoard extends JPanel implements MouseListener {
 	}
 
 	private void wrongTurn() {
-		JFrame frame = new JFrame("Wrong Turn");
+		frame = new JFrame("Wrong Turn");
 		Container wrongTurnDialog=new Container();
 		JLabel wrongTurn = new JLabel("Not your turn!");
 		Box box1 = Box.createHorizontalBox();

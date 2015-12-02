@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class startBox extends JDialog {
 	private Container frame;
+	private JComboBox choices;
+	private JComboBox layoutChoices;
 	public Color pitColor=null;
 	public Color backgroundColor=null;
 	public Color fontColor=null;
@@ -32,7 +34,7 @@ public class startBox extends JDialog {
 	public startBox() {
 		stoneCount = 3;
 		layout = layouts[0];
-		JComboBox choices = new JComboBox();
+		choices = new JComboBox();
 		choices.addItem("Choose Stone Count");
 		choices.addItem(3);
 		choices.addItem(4);
@@ -43,7 +45,7 @@ public class startBox extends JDialog {
 			}
 		});
 
-		JComboBox layoutChoices = new JComboBox();
+		layoutChoices = new JComboBox();
 		layoutChoices.addItem("Choose Layout Design");
 		layoutChoices.addItem(layouts[0]);
 		layoutChoices.addItem(layouts[1]);
