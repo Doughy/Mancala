@@ -15,8 +15,6 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class startBox extends JDialog {
 	private Container frame;
-	private JComboBox choices;
-	private JComboBox layoutChoices;
 	public Color pitColor=null;
 	public Color backgroundColor=null;
 	public Color fontColor=null;
@@ -34,18 +32,18 @@ public class startBox extends JDialog {
 	public startBox() {
 		stoneCount = 3;
 		layout = layouts[0];
-		choices = new JComboBox();
+		JComboBox choices = new JComboBox();
 		choices.addItem("Choose Stone Count");
 		choices.addItem(3);
 		choices.addItem(4);
-		
+
 		choices.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				stoneCount=(int) choices.getSelectedItem();
 			}
 		});
 
-		layoutChoices = new JComboBox();
+		JComboBox layoutChoices = new JComboBox();
 		layoutChoices.addItem("Choose Layout Design");
 		layoutChoices.addItem(layouts[0]);
 		layoutChoices.addItem(layouts[1]);
@@ -120,10 +118,4 @@ public class startBox extends JDialog {
 	public void showStartUpBox() {setVisible(true);}
 	
 	public static int stoneNumber() {return stoneCount;}
-	
-	public Color getPitColor(){return pitColor;}
-	
-	public Color getBackgroundColor(){return backgroundColor;}
-	
-	public Color getFontColor(){return fontColor;}
 }
