@@ -188,7 +188,12 @@ public class Mancala {
 	{
 		int over=0;// 0 game not over; 1 gmae over
 		if(gameOver())
-			over=1;
+		{
+			if(mancalaA>mancalaB)
+				over=1;//A wins
+			else
+				over=2;//B wins
+		}
 		return over;
 			
 	}
