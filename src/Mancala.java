@@ -160,7 +160,7 @@ public class Mancala {
 				else
 				{
 					x= x + (y * 2 - 1);
-					if(stonesToPlace==1 && board[y][x]==0 && board[1-y][x]!=0 && playerNum==y)
+					if(stonesToPlace==1 && board[y][x]==0 && playerNum==y)
 					{
 						captureAllFor(y,x);
 					}
