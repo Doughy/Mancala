@@ -66,12 +66,24 @@ public class Mancala {
 		return stonesInPit;
 	}
 	
+	/**
+	 * adds a stones to mancala A and returns the stones
+	 * still left to place
+	 * @param stones number of stones to place
+	 * @return stones to still be placed
+	 */
 	public int aCapture(int stones)
 	{
 		mancalaA++;
 		return --stones;
 	}
 	
+	/**
+	 * adds a stones to mancala B and returns the stones
+	 * still left to place
+	 * @param stones number of stones to place
+	 * @return stones to still be placed
+	 */
 	public int bCapture(int stones)
 	{
 		mancalaB++;
@@ -148,7 +160,7 @@ public class Mancala {
 				else
 				{
 					x= x + (y * 2 - 1);
-					if(stonesToPlace==1 && board[y][x]==0 && playerNum==y)
+					if(stonesToPlace==1 && board[y][x]==0 && board[1-y][x]!=0 && playerNum==y)
 					{
 						captureAllFor(y,x);
 					}
@@ -166,6 +178,11 @@ public class Mancala {
 		return goAgain;
 	}
 	
+	
+	/**
+	 * returns whether or not the game is over
+	 * @return true or false if game is over or not
+	 */
 	public boolean gameOver()
 	{
 		boolean over=false;
@@ -184,9 +201,15 @@ public class Mancala {
 		return over;
 	}
 	
+	/**
+	 * returns 0 if game is not over
+	 * 1 if player A wins
+	 * 2 if player B wins
+	 * @return over 0, 1, 2
+	 */
 	public int isGameOver()
 	{
-		int over=0;// 0 game not over; 1 gmae over
+		int over=0;// 0 game not over; 1 game over
 		if(gameOver())
 		{
 			if(mancalaA>mancalaB)
@@ -198,26 +221,47 @@ public class Mancala {
 			
 	}
 	
+	/**
+	 * return mancalaA pit
+	 * @return mancalaA
+	 */
 	public int getPlayer1Mancala()
 	{
 		return mancalaA;
 	}
 	
+	/**
+	 * return mancalaB pit
+	 * @return mancalaB
+	 */
 	public int getPlayer2Mancala()
 	{
 		return mancalaB;
 	}
 	
+	/**
+	 * return which player's turn it is
+	 * 1 playerA
+	 * 2 playerB
+	 * @return playerTurn
+	 */
 	public int getPlayerTurn()
 	{
 		return playerTurn;
 	}
 	
+	/**
+	 * returns 2d array of board
+	 * @return board
+	 */
 	public int[][] getBoard()
 	{
 		return board;
 	}
 	
+	/**
+	 * undos the previous move
+	 */
 	public void undoMove()
 	{
 		if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
@@ -231,6 +275,10 @@ public class Mancala {
 		}
 	}
 	
+	/**
+	 * returns the undo amount for current player
+	 * @return undos
+	 */
 	public int getUndoAmount()
 	{
 		int undos=0;//will be player undos for this turn
@@ -241,6 +289,9 @@ public class Mancala {
 		return undos;
 	}
 	
+	/**
+	 * prints board
+	 */
 	public void printBoard()
 	{
 		System.out.println("B6 B5 B4 B3 B2 B1");
