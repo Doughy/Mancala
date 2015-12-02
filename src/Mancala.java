@@ -19,7 +19,7 @@ public class Mancala {
 		mancalaA=0;
 		mancalaB=0;
 		board=new int[ROWS][COLUMNS];
-		playerTurn=0;
+		playerTurn=1;
 		boards=new BoardStack();
 		aUndo=3;
 		bUndo=3;
@@ -89,15 +89,15 @@ public class Mancala {
 		//Takes all the stones from the opposing pit.
 		if(player == 0) // y = 0 is Player B. y = 1 is Player A
 		{
-			int stones = board[1][pit];
+			int stones = board[1][pit]+1;
 			board[1][pit] = 0;
-			board[player][pit] += stones;
+			mancalaB += stones;
 		}
 		else if(player == 1)
 		{
-			int stones = board[0][pit];
+			int stones = board[0][pit]+1;
 			board[0][pit] = 0;
-			board[player][pit] += stones;
+			mancalaA += stones;
 		}
 		else
 		{
@@ -124,15 +124,6 @@ public class Mancala {
 
 			while(stonesToPlace>0)
 			{
-				// Prior to placement, checks if stone is last.
-				if(stonesToPlace==1)
-				{
-					lastStone = true;
-					// Next condition is checking the size of the next pit to place.
-					// if next pit is 0, then captureAllFor
-					captureAllFor(y,x);
-
-				}
 
 				if(x==COLUMNS-1 && y==1)
 				{
@@ -158,7 +149,14 @@ public class Mancala {
 				else
 				{
 					x= x + (y * 2 - 1);
-					board[y][x]++;
+					if(stonesToPlace==1 && board[y][x]==0 && playerNum==y)
+					{
+						captureAllFor(y,x);
+					}
+					else
+					{
+						board[y][x]++;
+					}
 					stonesToPlace--;
 				}
 			}
@@ -221,11 +219,11 @@ public class Mancala {
 		if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
 		{
 			board=boards.pop();
-			playerTurn = 1 - playerTurn;
 			if(playerTurn==0)
 				aUndo--;
 			else
 				bUndo--;
+			playerTurn = 1 - playerTurn;
 		}
 	}
 	
