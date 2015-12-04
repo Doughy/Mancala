@@ -29,6 +29,7 @@ public class MancalaBoard extends JPanel implements MouseListener {
 	private Color backgroundColor, pitColor, fontColor, marbleColor, marbleOutlineColor;
 	private Mancala game=null;
 	private int[][] board=null;
+	private JFrame frame;
 	
 	/**
 	 * Constructor for the Mancala Board GUI
@@ -229,7 +230,7 @@ public class MancalaBoard extends JPanel implements MouseListener {
 	 * and it is not their turn
 	 */
 	private void wrongTurn() {
-		JFrame frame = new JFrame("Wrong Turn");
+		frame = new JFrame("Wrong Turn");
 		Container wrongTurnDialog=new Container();
 		JLabel wrongTurn = new JLabel("Not your turn!");
 		Box box1 = Box.createHorizontalBox();

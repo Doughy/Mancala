@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class StartBox extends JDialog {
 	private Container frame;
+	private JComboBox layoutChoices;
+	private JComboBox choices;
 	private Color pitColor, backgroundColor, fontColor, marbleColor, marbleOutlineColor;
 	private static int stoneCount=3;
 	private int width = 250, height=150;
@@ -28,7 +30,7 @@ public class StartBox extends JDialog {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public StartBox() {
 		//comboBox for choosing the stone amount
-		JComboBox choices = new JComboBox();
+		choices = new JComboBox();
 		choices.addItem("Choose Stone Count");
 		choices.addItem(3);
 		choices.addItem(4);
@@ -49,7 +51,7 @@ public class StartBox extends JDialog {
 		marbleOutlineColor=context.getMarbleOutlineColor();
 		
 		//comboBox for the layout design choices
-		JComboBox layoutChoices = new JComboBox();
+		layoutChoices = new JComboBox();
 		layoutChoices.addItem("Choose Layout Design");
 		layoutChoices.addItem(layouts[0]);
 		layoutChoices.addItem(layouts[1]);

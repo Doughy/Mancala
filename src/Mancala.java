@@ -203,16 +203,20 @@ public class Mancala {
 	public boolean gameOver()
 	{
 		boolean over=false;
+		int sumA=0;
+		int sumB=0;
 		
-		for(int y=0;y<ROWS ;y++)
+		for(int x=0;x<COLUMNS ;x++)
 		{
-			int sum=0;
-			for(int x=0;x<COLUMNS;x++)
-			{
-				sum+=board[y][x];
-			}
-			if(sum==0)
-				over=true;
+			sumA+=board[1][x];
+			sumB+=board[0][x];
+		}
+		
+		if(sumA==0 || sumB==0)
+		{
+			over=true;
+			mancalaA+=sumB;
+			mancalaB+=sumA;
 		}
 		
 		return over;
@@ -293,18 +297,11 @@ public class Mancala {
 				if(!wentAgain)
 				{
 					playerTurn=1-playerTurn;
-					if(playerTurn==0)
-						aUndo--;
-					else
-						bUndo--;
 				}
+				if(playerTurn==0)
+					aUndo--;
 				else
-				{
-					if(playerTurn==0)
-						aUndo--;
-					else
-						bUndo--;
-				}
+					bUndo--;
 			}
 		}
 	}
