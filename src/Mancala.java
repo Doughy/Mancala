@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Mancala {
 	private int mancalaA;//player A's Mancala count
 	private int mancalaB;//player B's Mancala count
@@ -5,7 +7,9 @@ public class Mancala {
 	private static final int ROWS=2;//rows of board
 	private static final int COLUMNS=6;//columns of board
 	private int playerTurn;
-	private BoardStack boards;
+	private Stack<int[][]> boards;
+	private Stack<int[]> mancalaPits;
+	private boolean wentAgain;
 	private int aUndo;
 	private int bUndo;
 	
@@ -18,10 +22,12 @@ public class Mancala {
 		mancalaA=0;
 		mancalaB=0;
 		board=new int[ROWS][COLUMNS];
-		playerTurn=1;
-		boards=new BoardStack();
+		playerTurn=1;//A's turn
+		boards=new Stack<int[][]>();
+		mancalaPits=new Stack<int[]>();
 		aUndo=3;
 		bUndo=3;
+		wentAgain=false;
 	}
 	
 	/**
@@ -38,7 +44,18 @@ public class Mancala {
 				board[y][x]=numStones;
 			}
 		}
-		boards.push(board);
+		pushBoard();
+	}
+	
+	public void pushBoard()
+	{
+		int temp[][]=new int[ROWS][];
+		for(int i=0; i<ROWS; i++)
+		{
+			temp[i]=board[i].clone();
+		}
+		boards.push(temp);
+		mancalaPits.push(new int[]{mancalaA, mancalaB});
 	}
 	
 	/**
@@ -127,11 +144,11 @@ public class Mancala {
 		boolean goAgain=false;
 		int y=playerNum;
 		int x=pitPosition;
+		pushBoard();
 		
 		if(hasStones(x,y))
 		{
 			int stonesToPlace=getStones(x,y);
-			boolean lastStone = false;
 
 			while(stonesToPlace>0)
 			{
@@ -174,7 +191,7 @@ public class Mancala {
 		}
 		if(!goAgain)
 			playerTurn = 1 - playerTurn;
-		boards.push(board);
+		wentAgain=goAgain;
 		return goAgain;
 	}
 	
@@ -264,14 +281,31 @@ public class Mancala {
 	 */
 	public void undoMove()
 	{
-		if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
+		if(boards.size()>0)
 		{
-			board=boards.pop();
-			if(playerTurn==0)
-				aUndo--;
-			else
-				bUndo--;
-			playerTurn = 1 - playerTurn;
+			if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
+			{
+				board=boards.pop();
+				int[] mancalas=mancalaPits.pop();
+				mancalaA=mancalas[0];
+				mancalaB=mancalas[1];
+
+				if(!wentAgain)
+				{
+					playerTurn=1-playerTurn;
+					if(playerTurn==0)
+						aUndo--;
+					else
+						bUndo--;
+				}
+				else
+				{
+					if(playerTurn==0)
+						aUndo--;
+					else
+						bUndo--;
+				}
+			}
 		}
 	}
 	
