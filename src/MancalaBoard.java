@@ -47,7 +47,7 @@ public class MancalaBoard extends JPanel implements MouseListener {
 		this.marbleColor=marbleColor;
 		this.marbleOutlineColor=marbleOutlineColor;
 		this.game=game;
-		board=game.getBoard();
+
 	}
 	
 	/**
@@ -59,6 +59,7 @@ public class MancalaBoard extends JPanel implements MouseListener {
 		this.setBackground(backgroundColor);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(pitColor);
+		board=game.getBoard();
 		
 		//used to draw the arrows
 		g2.setStroke(new BasicStroke(20));

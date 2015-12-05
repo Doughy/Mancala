@@ -287,7 +287,7 @@ public class Mancala {
 	{
 		if(boards.size()>0)
 		{
-			if((playerTurn==0 && aUndo>0) || (playerTurn==1 && bUndo>0))
+			if((playerTurn==0 && bUndo>0) || (playerTurn==1 && aUndo>0))
 			{
 				board=boards.pop();
 				int[] mancalas=mancalaPits.pop();
