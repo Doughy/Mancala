@@ -12,6 +12,7 @@ public class Mancala {
 	private boolean wentAgain;
 	private int aUndo;
 	private int bUndo;
+	private boolean gameOver;
 	
 	/**
 	 * this constructs a blank Mancala board
@@ -28,6 +29,7 @@ public class Mancala {
 		aUndo=3;
 		bUndo=3;
 		wentAgain=false;
+		gameOver=false;
 	}
 	
 	/**
@@ -218,7 +220,7 @@ public class Mancala {
 			mancalaB+=sumB;
 			mancalaA+=sumA;
 		}
-		
+		gameOver=over;
 		return over;
 	}
 	
@@ -286,7 +288,7 @@ public class Mancala {
 	 */
 	public void undoMove()
 	{
-		if(boards.size()>0)
+		if(boards.size()>0 && !gameOver)
 		{
 			if((playerTurn==0 && bUndo>0) || (playerTurn==1 && aUndo>0))
 			{
