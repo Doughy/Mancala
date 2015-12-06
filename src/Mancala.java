@@ -215,8 +215,8 @@ public class Mancala {
 		if(sumA==0 || sumB==0)
 		{
 			over=true;
-			mancalaA+=sumB;
-			mancalaB+=sumA;
+			mancalaB+=sumB;
+			mancalaA+=sumA;
 		}
 		
 		return over;
@@ -230,7 +230,7 @@ public class Mancala {
 	 */
 	public int isGameOver()
 	{
-		int over=0;// 0 game not over; 1 game over
+		int over=0;// 0 game not over
 		if(gameOver())
 		{
 			if(mancalaA>mancalaB)
