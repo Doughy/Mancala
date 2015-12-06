@@ -143,13 +143,15 @@ public class Mancala {
 	 */
 	public boolean move(int  playerNum, int pitPosition)
 	{
-		boolean goAgain=false;
+		boolean goAgain=true;
 		int y=playerNum;
 		int x=pitPosition;
-		pushBoard();
+		
 		
 		if(hasStones(x,y))
 		{
+			pushBoard();
+			goAgain=false;
 			int stonesToPlace=getStones(x,y);
 
 			while(stonesToPlace>0)
@@ -190,10 +192,14 @@ public class Mancala {
 					stonesToPlace--;
 				}
 			}
+			
+			if(!goAgain)
+				playerTurn = 1 - playerTurn;
+			wentAgain=goAgain;
+			
 		}
-		if(!goAgain)
-			playerTurn = 1 - playerTurn;
-		wentAgain=goAgain;
+		
+		
 		return goAgain;
 	}
 	
