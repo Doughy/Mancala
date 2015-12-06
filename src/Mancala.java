@@ -237,6 +237,7 @@ public class Mancala {
 				over=1;//A wins
 			else
 				over=2;//B wins
+			board=new int[ROWS][COLUMNS];
 		}
 		return over;
 			

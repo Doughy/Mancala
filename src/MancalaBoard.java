@@ -279,6 +279,8 @@ public class MancalaBoard extends JPanel implements MouseListener {
 		frame.pack();
 		frame.setVisible(true);
 		gameOverDialog.setVisible(true);
+		repaint();
+		game.printBoard();
 	}
 
 	/**
